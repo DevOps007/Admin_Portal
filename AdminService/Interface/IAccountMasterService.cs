@@ -11,6 +11,6 @@ namespace BusinessLayer.Interface
     {
         Task<IEnumerable<accmast>> SearchAccountsAsync(accmast accmast);
 
-        Task<accmast> GetAccountByAccnoAsync(string accno);
+        Task<AccountModel> GetAccountByAccnoAsync(string accno);
     }
 }

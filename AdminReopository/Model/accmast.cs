@@ -25,9 +25,9 @@ namespace DataLayer.Model
         public string? mop { get; set; }
         public string? nri { get; set; }
         public string? staff { get; set; }
-        public string? open_date { get; set; }
+        public DateTime? open_date { get; set; }
         public string? eff_date { get; set; }
-        public string? close_date { get; set; }
+        public DateTime? close_date { get; set; }
         public double? depamt { get; set; }
         public double? matamt { get; set; }
         public string? matdate { get; set; }

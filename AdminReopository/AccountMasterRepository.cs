@@ -34,14 +34,19 @@ namespace DataLayer
         {
             try
             {
-                 _dbConnection.Open();
-                var sql = "SELECT acc_type,accno,name,fdrno,limit,op_bal,cl_bal,status from accmast where accno=@accno or open_date=@open_date or close_date=@close_date or oldacno=@oldacno or status=@status";
+                _dbConnection.Open();
+                var sql = "SELECT acc_type, accno, name, fdrno, limit, op_bal, cl_bal, status FROM accmast WHERE accno = @accno OR open_date = @open_date OR close_date = @close_date OR oldacno = @oldacno OR status = @status";
                 var parameters = new DynamicParameters();
-                parameters.AddDynamicParams(new { accmast.accno,accmast.open_date,accmast.close_date,accmast.oldacno,accmast.status});
+                parameters.Add("@accno", accmast.accno);
+                parameters.Add("@open_date", accmast.open_date);
+                parameters.Add("@close_date", accmast.close_date);
+                parameters.Add("@oldacno", accmast.oldacno);
+                parameters.Add("@status", accmast.status);
+
                 var result = await _dbConnection.QueryAsync<accmast>(sql, parameters);
                 return result;
             }
-            catch (Exception ex) { return null; }
+            catch (Exception ex) { return null; }finally { _dbConnection.Close(); }
 
         }
     }

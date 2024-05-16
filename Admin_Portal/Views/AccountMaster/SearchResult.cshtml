@@ -1,4 +1,4 @@
-﻿@model List<DataLayer.Model.accmast>
+﻿@model DataLayer.Model.AccountModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -15,38 +15,38 @@
     <div class="form-row">
         <div class="form-group  col-md-3">
             <label for="accountNumber">Account Number:</label>
-            <input type="text" value="@TempData["AccNo"]" asp-for="First().accno" class="form-control" id="accountNumber" placeholder="Enter Account Number" />
+            <input type="text" value="@Model.accmast.accno" asp-for="@Model.accmast.accno" class="form-control" id="accountNumber" placeholder="Enter Account Number" />
         </div>
         <div class="form-group col-md-3">
             <label for="openStartDate">Account Open Start Date:</label>
-            <input type="date" value="@TempData["OpenDate"]" asp-for="First().open_date" class="form-control" id="openStartDate" placeholder="Select Start Date" />
+            <input type="date" value="@Model.accmast.open_date?.ToString("yyyy-MM-dd")" asp-for="@Model.accmast.open_date" class="form-control" id="openStartDate" placeholder="Select Start Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="openEndDate">Account Open End Date:</label>
-            <input type="date" value="@TempData["CloseDate"]" asp-for="First().close_date" class="form-control" id="openEndDate" placeholder="Select End Date" />
+            <input type="date" value="@Model.accmast.close_date?.ToString("yyyy-MM-dd")" asp-for="@Model.accmast.close_date" class="form-control" id="openEndDate" placeholder="Select End Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="oldAccountNumber">Old Account Number:</label>
-            <input type="text" value="@TempData["OldAccNo"]" asp-for="First().oldacno" class="form-control" id="oldAccountNumber" placeholder="Enter Old Account Number" />
+            <input type="text" value="@Model.accmast.oldacno" asp-for="@Model.accmast.oldacno" class="form-control" id="oldAccountNumber" placeholder="Enter Old Account Number" />
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-3">
             <label for="accountName">Account Name / Title:</label>
-            <input type="text" asp-for="First().name" class="form-control" id="accountName" placeholder="Enter Account Name or Title" />
+            <input type="text" asp-for="@Model.accmast.name" class="form-control" id="accountName" placeholder="Enter Account Name or Title" />
         </div>
         <div class="form-group col-md-3">
             <label for="closedStartDate">Account Closed Start Date:</label>
-            <input type="date" asp-for="First().sanc_date" class="form-control" id="closedStartDate" placeholder="Select Start Date" />
+            <input type="date" asp-for="@Model.accmast.sanc_date" class="form-control" id="closedStartDate" placeholder="Select Start Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="closedEndDate">Account Closed End Date:</label>
-            <input type="date" asp-for="First().eff_date" class="form-control" id="closedEndDate" placeholder="Select End Date" />
+            <input type="date" asp-for="@Model.accmast.eff_date" class="form-control" id="closedEndDate" placeholder="Select End Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="status">Status:</label>
-            <select class="form-control" asp-for="First().status" id="status">
+            <select class="form-control" asp-for="@Model.accmast.status" id="status">
                 <option value="">-- Select Status --</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
@@ -76,7 +76,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var r in Model)
+            @foreach (var r in Model.Accmast)
             {
                 <tr style="background: #ffff0000">
                     <td>@r.acc_type</td>

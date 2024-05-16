@@ -18,9 +18,11 @@
                 _accountMasterRepository = accountMasterRepository;
             }
 
-        public async Task<accmast> GetAccountByAccnoAsync(string accno)
+        public async Task<AccountModel> GetAccountByAccnoAsync(string accno)
         {
-            return await _accountMasterRepository.GetAccountByAccnoAsync(accno);
+            var accountModel=new AccountModel();
+            accountModel.accmast= await _accountMasterRepository.GetAccountByAccnoAsync(accno);
+            return accountModel;
         }
 
         public async Task<IEnumerable<accmast>> SearchAccountsAsync(accmast accmast)

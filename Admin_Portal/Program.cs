@@ -67,7 +67,14 @@ try
     builder.Services.AddScoped<IAccountMasterRepository, AccountMasterRepository>();
     builder.Services.AddTransient<ILogCleanupJob, LogCleanupJob>();
     builder.Services.AddScoped<DbConnection>();
-
+    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Account/Logout";
+                });
+    builder.Services.AddAuthorization();
+    builder.Services.AddControllersWithViews();
     var app = builder.Build();
    
 
@@ -83,8 +90,7 @@ try
     app.UseSerilogRequestLogging();
 
     app.UseRouting();
-    //app.UseAuthentication();
-
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.UseMiddleware<ExceptionHandling>();
