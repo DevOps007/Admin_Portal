@@ -1,0 +1,82 @@
+﻿@model DataLayer.Model.accmast
+<div class="row mb-2" style="padding-left: 8px;">
+    <h3>Account Details</h3>
+</div>
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="accno">Account No:</label>
+                    <input type="text" id="accno" name="accno" value="@Model.accno" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Account Holder Name:</label>
+                    <input type="text" id="name" name="name" value="@Model.name" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="acc_type">Account Type:</label>
+                    <input type="text" id="acc_type" name="acc_type" value="@Model.acc_type" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="brncd">Branch Code:</label>
+                    <input type="text" id="brncd" name="brncd" value="@Model.branch" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ifsc">IFSC:</label>
+                    <input type="text" id="ifsc" name="ifsc" value="@Model.bank" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="micr">MICR:</label>
+                    <input type="text" id="micr" name="micr" value="@Model.custid" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="op_dt">Opening Date:</label>
+                    <input type="date" id="op_dt" name="op_dt" value="@Model.cl_bal" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="curr_bal">Current Balance:</label>
+                    <input type="text" id="curr_bal" name="curr_bal" value="@Model.op_bal" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="addrs1">Address 1:</label>
+                    <input type="text" id="addrs1" name="addrs1" value="@Model.accowner" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="addrs2">Address 2:</label>
+                    <input type="text" id="addrs2" name="addrs2" value="@Model.acc_desc" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+               
+        </div>
+        </form>

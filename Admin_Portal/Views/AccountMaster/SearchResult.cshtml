@@ -1,0 +1,116 @@
+﻿@model List<DataLayer.Model.accmast>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<HASH>" crossorigin="anonymous" />
+
+<link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+<div class="row mb-2" style="padding-left: 8px;">
+    <h3>Account Master</h3>
+</div>
+<form asp-controller="AccountMaster" asp-action="SearchResult" method="post">
+
+    <div class="form-row">
+        <div class="form-group  col-md-3">
+            <label for="accountNumber">Account Number:</label>
+            <input type="text" value="@TempData["AccNo"]" asp-for="First().accno" class="form-control" id="accountNumber" placeholder="Enter Account Number" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="openStartDate">Account Open Start Date:</label>
+            <input type="date" value="@TempData["OpenDate"]" asp-for="First().open_date" class="form-control" id="openStartDate" placeholder="Select Start Date" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="openEndDate">Account Open End Date:</label>
+            <input type="date" value="@TempData["CloseDate"]" asp-for="First().close_date" class="form-control" id="openEndDate" placeholder="Select End Date" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="oldAccountNumber">Old Account Number:</label>
+            <input type="text" value="@TempData["OldAccNo"]" asp-for="First().oldacno" class="form-control" id="oldAccountNumber" placeholder="Enter Old Account Number" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="accountName">Account Name / Title:</label>
+            <input type="text" asp-for="First().name" class="form-control" id="accountName" placeholder="Enter Account Name or Title" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="closedStartDate">Account Closed Start Date:</label>
+            <input type="date" asp-for="First().sanc_date" class="form-control" id="closedStartDate" placeholder="Select Start Date" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="closedEndDate">Account Closed End Date:</label>
+            <input type="date" asp-for="First().eff_date" class="form-control" id="closedEndDate" placeholder="Select End Date" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="status">Status:</label>
+            <select class="form-control" asp-for="First().status" id="status">
+                <option value="">-- Select Status --</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+    <button type="reset" class="btn btn-secondary">Reset</button>
+</form>
+
+
+
+
+<div>
+    <table id="Account-History-table" class="styled-table">
+        <thead>
+            <tr>
+                <th>Account Type</th>
+                <th>Account Number</th>
+                <th>Customer Name</th>
+                <th>FDR Number</th>
+                <th>Limits</th>
+                <th>Balance</th>
+                <th>Status</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr style="background: #ffff0000">
+                    <td>@r.acc_type</td>
+                    <td>@r.accno</td>
+                    <td>@r.name</td>
+                    <td>@r.fdrno</td>
+                    <td>@r.limit</td>
+                    <td>@r.op_bal</td>
+                    <td>@r.status</td>
+                    <td>
+                        <a href="@Url.Action("Details", "AccountMaster", new { Accno = r.accno })">
+                            <i class="fas fa-eye"></i> 
+                        </a>
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Account-History-table').DataTable({
+                "paging": false,
+                "searching": false,
+                "info": false
+            });
+        });
+    </script>
+}
+
+
