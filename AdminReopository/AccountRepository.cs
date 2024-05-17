@@ -32,8 +32,8 @@ namespace AdminReopository
                 using (var connection = _dbConnection)
                 {
                     connection.Open();
-                    var fromDate = startDate.HasValue ? startDate.Value.ToString("yyyy-MM-dd") : null;
-                    var toDate = endDate.HasValue ? endDate.Value.ToString("yyyy-MM-dd") : null;
+                    var fromDate = startDate.HasValue ? startDate.Value.ToString("dd-MM-yyyy") : null;
+                    var toDate = endDate.HasValue ? endDate.Value.ToString("dd-MM-yyyy") : null;
                     var parameters = new DynamicParameters();
                     parameters.Add("@from_Date", fromDate);
                     parameters.Add("@to_Date", toDate);

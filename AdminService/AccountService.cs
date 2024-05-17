@@ -25,6 +25,7 @@ namespace AdminService
             {
                 var accmast = new accmast()
                 {
+                    accno = accno,
                     from_Date = startDate,
                     to_Date = endDate
                 };

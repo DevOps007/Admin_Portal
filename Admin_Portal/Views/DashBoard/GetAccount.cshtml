@@ -6,27 +6,27 @@
 
 <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-    <form style="padding: .5rem .5rem" height: 53px; border-radius: 8px;" method="post" action="@Url.Action("GetAccount", "DashBoard")">
-        <div class="row mb-2" style="padding-left: 8px;">
-            <h3>Account Statement</h3>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-2">
-                <label for="account-no">Account Number:</label>
+<form style="padding: .5rem .5rem" height: 53px; border-radius: 8px;" method="post" action="@Url.Action("GetAccount", "DashBoard")">
+    <div class="row mb-2" style="padding-left: 8px;">
+        <h3>Account Statement</h3>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="account-no">Account Number:</label>
             <input type="text" value="@Model.accmast.accno" class="form-control" id="accno" name="accno" required>
-            </div>
-            <div class="form-group col-md-2">
-                <label class="ml-2" for="start-date">Start Date:</label>
-            
-            <input type="date" value="@Model.accmast.from_Date?.ToString("yyyy-MM-dd")" class="form-control" id="startDate" name="startDate" required>
-            </div>
-            <div class="form-group col-md-2">
-                <label class="ml-2" for="end-date">End Date:</label>
-            <input type="date" value="@Model.accmast.to_Date?.ToString("yyyy-MM-dd")" class="form-control" id="endDate" name="endDate" required>
-            </div>
-            <div class="form-group col-md-2"><input class="ml-2 btn btn-primary" type="submit" style="margin-top: 32px;" value="Submit"></div>
         </div>
-    </form>
+        <div class="form-group col-md-2">
+            <label class="ml-2" for="start-date">Start Date:</label>
+
+            <input type="date" value="@Model.accmast.from_Date?.ToString("yyyy-MM-dd")" class="form-control" id="startDate" name="startDate" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label class="ml-2" for="end-date">End Date:</label>
+            <input type="date" value="@Model.accmast.to_Date?.ToString("yyyy-MM-dd")" class="form-control" id="endDate" name="endDate" required>
+        </div>
+        <div class="form-group col-md-2"><input class="ml-2 btn btn-primary" type="submit" style="margin-top: 32px;" value="Submit"></div>
+    </div>
+</form>
 
 <div>
 </div>
@@ -36,12 +36,12 @@
     {
         <div style="border-radius: 8px; margin-bottom: 15px; padding: .5rem .5rem">
             <strong>Account No:</strong> @r.accno <br>
-            <strong>Name:</strong> @r.name <br>
-            <strong>Owner:</strong> @r.accowner <br>
+            <strong>Name:</strong> @r.cname <br>
+            <strong>Address:</strong> @r.addr1 <br>
             <div class style="position:absolute;float:right;right:9vw;top:218px">
-                <strong>Account Description:</strong> @r.acc_desc<br>
-                <strong>Opening Balance:</strong> @r.op_bal <br>
-                <strong>Closing Balance:</strong> @r.cl_bal <br>
+                <strong>Bank Name:</strong> @r.bankname<br>
+                <strong>Opening Balance:</strong> @r.openingbalance <br>
+                <strong>Closing Balance:</strong> @r.closingbalance <br>
             </div>
         </div>
     }
@@ -54,29 +54,28 @@
                 <th>SR No</th>
                 <th>Txn Date</th>
                 <th>Txn Details</th>
-                <th>Description</th>
-                <th>FDR No</th>
-                <th>Withdraw</th>
-                <th>Deposit</th>
-                <th>Balance</th>
-                <th>Maker</th>
-                <th>Checker</th>
+                <th>Bank Name</th>
+                <th>Bank</th>
+                <th>Bank Address</th>
+                <th>Balance Type</th>
+                <th>Opening Balance</th>
+                <th>Closing Balance</th>
+               
             </tr>
         </thead>
         <tbody>
             @foreach (var r in Model.Accmast)
             {
                 <tr style="background: #ffff0000">
-                    <td>@r.accno</td>
-                    <td>@r.open_date</td>
-                    <td>@r.acc_desc</td>
-                    <td>@r.fdrno</td>
-                    <td>@r.acc_type</td>
-                    <td>@r.op_bal</td>
-                    <td>@r.cl_bal</td>
-                    <td>@r.accowner</td>
-                    @* <td>@r.cname</td>
-                    <td>@r.newacno</td> *@
+                    <td>@r.id</td>
+                    <td>@r.txn_desc</td>
+                    <td>@r.bankname</td>
+                    <td>@r.bank</td>
+                    <td>@r.br_addr1</td>
+                    <td>@r.baltype</td>
+                    <td>@r.openingbalance</td>
+                    <td>@r.closingbalance</td>
+                 
                 </tr>
             }
         </tbody>
