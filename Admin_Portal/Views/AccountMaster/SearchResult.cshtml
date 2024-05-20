@@ -10,52 +10,53 @@
 <div class="row mb-2" style="padding-left: 8px;">
     <h3>Account Master</h3>
 </div>
-<form asp-controller="AccountMaster" asp-action="SearchResult" method="post">
+<form asp-controller="AccountMaster" asp-action="SearchResult" method="post" style="margin-bottom:20px">
 
     <div class="form-row">
         <div class="form-group  col-md-3">
             <label for="accountNumber">Account Number:</label>
-            <input type="text" value="@Model.accmast.accno" asp-for="@Model.accmast.accno" class="form-control" id="accountNumber" placeholder="Enter Account Number" />
+            <input type="text" value="@Model.accmast.accno" asp-for="@Model.accmast.accno" class="form-control"  placeholder="Enter Account Number" />
         </div>
         <div class="form-group col-md-3">
             <label for="openStartDate">Account Open Start Date:</label>
-            <input type="date" value="@Model.accmast.open_date?.ToString("yyyy-MM-dd")" asp-for="@Model.accmast.open_date" class="form-control" id="openStartDate" placeholder="Select Start Date" />
+            <input type="date" value="@Model.accmast.open_date?.ToString("yyyy-MM-dd")" asp-for="@Model.accmast.open_date" class="form-control"  placeholder="Select Start Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="openEndDate">Account Open End Date:</label>
-            <input type="date" value="@Model.accmast.close_date?.ToString("yyyy-MM-dd")" asp-for="@Model.accmast.close_date" class="form-control" id="openEndDate" placeholder="Select End Date" />
+            <input type="date" value="@Model.accmast.open_end_date?.ToString("yyyy-MM-dd")" asp-for="@Model.accmast.open_end_date" class="form-control"  placeholder="Select End Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="oldAccountNumber">Old Account Number:</label>
-            <input type="text" value="@Model.accmast.oldacno" asp-for="@Model.accmast.oldacno" class="form-control" id="oldAccountNumber" placeholder="Enter Old Account Number" />
+            <input type="text" value="@Model.accmast.oldacno" asp-for="@Model.accmast.oldacno" class="form-control"  placeholder="Enter Old Account Number" />
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-3">
             <label for="accountName">Account Name / Title:</label>
-            <input type="text" asp-for="@Model.accmast.name" class="form-control" id="accountName" placeholder="Enter Account Name or Title" />
+            <input type="text" asp-for="@Model.accmast.name" class="form-control" placeholder="Enter Account Name or Title" />
         </div>
         <div class="form-group col-md-3">
             <label for="closedStartDate">Account Closed Start Date:</label>
-            <input type="date" asp-for="@Model.accmast.sanc_date" class="form-control" id="closedStartDate" placeholder="Select Start Date" />
+            <input type="date" asp-for="@Model.accmast.close_date" value="@Model.accmast.close_date?.ToString("yyyy-MM-dd")" class="form-control"  placeholder="Select Start Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="closedEndDate">Account Closed End Date:</label>
-            <input type="date" asp-for="@Model.accmast.eff_date" class="form-control" id="closedEndDate" placeholder="Select End Date" />
+            <input type="date" asp-for="@Model.accmast.close_end_date" value="@Model.accmast.close_end_date?.ToString("yyyy-MM-dd")" class="form-control"  placeholder="Select End Date" />
         </div>
         <div class="form-group col-md-3">
             <label for="status">Status:</label>
-            <select class="form-control" asp-for="@Model.accmast.status" id="status">
+            <select class="form-control" asp-for="@Model.accmast.status" >
                 <option value="">-- Select Status --</option>
                 <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <!-- Add more options as needed -->
+                <option value="inactive">InActive</option>
+                <option value="dormant">Dormant</option>
+                <option value="closed">Closed</option>
             </select>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
-    <button type="reset" class="btn btn-secondary">Reset</button>
+    <button type="reset" id="clearBtn" class="btn btn-secondary">Reset</button>
 </form>
 
 
@@ -68,9 +69,6 @@
                 <th>Account Type</th>
                 <th>Account Number</th>
                 <th>Customer Name</th>
-                <th>FDR Number</th>
-                <th>Limits</th>
-                <th>Balance</th>
                 <th>Status</th>
                 <th>View</th>
             </tr>
@@ -80,11 +78,8 @@
             {
                 <tr style="background: #ffff0000">
                     <td>@r.acc_type</td>
-                    <td>@r.accno</td>
+                    <td>@r.newacno</td>
                     <td>@r.name</td>
-                    <td>@r.fdrno</td>
-                    <td>@r.limit</td>
-                    <td>@r.op_bal</td>
                     <td>@r.status</td>
                     <td>
                         <a href="@Url.Action("Details", "AccountMaster", new { Accno = r.accno })">
@@ -105,10 +100,13 @@
     <script>
         $(document).ready(function () {
             $('#Account-History-table').DataTable({
-                "paging": false,
+                "paging": true,
                 "searching": false,
                 "info": false
             });
+            $("#clearBtn").click(function () {
+                window.location.href = "/AccountMaster/SearchResult"
+            })
         });
     </script>
 }

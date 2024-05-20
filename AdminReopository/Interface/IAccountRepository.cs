@@ -10,6 +10,6 @@ namespace AdminReopository.Interface
 {
     public interface IAccountRepository
     {
-        Task<AccountModel> ExecuteYourStoredProcedure(DateTime? startDate, DateTime? endDate, string accountNumber);
+        Task<IEnumerable<TxnHistory>> ExecuteYourStoredProcedure(DateTime? startDate, DateTime? endDate, string accountNumber);
     }
 }

@@ -4,18 +4,22 @@ using System;
 using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
+using AdminReopository.Model;
+using Dapper;
 
 namespace AdminReopository
 {
     public class LoginRepository : ILoginRepository
     {
         private readonly IConfiguration _configuration;
+        private readonly IDbConnection _dbConnection;
         private readonly ILogger<LoginRepository> _logger;
 
         public LoginRepository(IConfiguration configuration, ILogger<LoginRepository> logger)
         {
             _configuration = configuration;
             _logger = logger;
+           // _dbConnection = new SqlConnection(dbConnection.ConnectionString);
         }
 
         public bool Login(string username, string password)
@@ -60,5 +64,14 @@ namespace AdminReopository
                 throw; // Re-throw the exception to be caught by the caller
             }
         }
+        //public async Task<Login> GetLoginAsync(string userName) {
+
+        //    _dbConnection.Open();
+        //    string sql = "Select BankName,BranchName,Location,BankCode from Login where username=@userName";
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("@userName", userName);
+        //    var result = await _dbConnection.QueryAsync<Login>(sql, parameters);
+        //    return result?.FirstOrDefault();
+        //}
     }
 }

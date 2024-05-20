@@ -19,7 +19,7 @@ namespace AdminService
             _logger = logger;
         }
 
-        public async Task<AccountModel> GetAccountData(string accno, DateTime startDate, DateTime endDate)
+        public async Task<IEnumerable<TxnHistory>> GetAccountData(string accno, DateTime startDate, DateTime endDate)
         {
             try
             {
@@ -28,13 +28,8 @@ namespace AdminService
                     from_Date = startDate,
                     to_Date = endDate
                 };
-                var accountMasterList= await _accountRepository.ExecuteYourStoredProcedure(accmast.from_Date, accmast.to_Date, accno);
-                var accountModel = new AccountModel()
-                {
-                    accmast = accmast,
-                    Accmast= accountMasterList.Accmast
-                };
-                return accountModel;
+                var accountStatementList= await _accountRepository.ExecuteYourStoredProcedure(accmast.from_Date, accmast.to_Date, accno);
+                return accountStatementList;
             }
             catch (Exception ex)
             {

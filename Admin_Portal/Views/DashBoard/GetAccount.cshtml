@@ -1,82 +1,84 @@
-﻿@model DataLayer.Model.AccountModel
-
+﻿@model Tuple<DataLayer.Model.AccountModel, IEnumerable<DataLayer.Model.TxnHistory>>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-    <form style="padding: .5rem .5rem" height: 53px; border-radius: 8px;" method="post" action="@Url.Action("GetAccount", "DashBoard")">
-        <div class="row mb-2" style="padding-left: 8px;">
-            <h3>Account Statement</h3>
+<form style="padding: .5rem .5rem" height: 53px; border-radius: 8px;" method="post" action="@Url.Action("GetAccount", "DashBoard")">
+    <div class="row mb-2" style="padding-left: 8px;">
+        <h3>Account Statement</h3>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="account-no">Account Number:</label>
+            <input type="text" value="@Model.Item1.accmast.accno" class="form-control" id="accno" name="accno" required>
         </div>
-        <div class="row">
-            <div class="form-group col-md-2">
-                <label for="account-no">Account Number:</label>
-            <input type="text" value="@Model.accmast.accno" class="form-control" id="accno" name="accno" required>
-            </div>
-            <div class="form-group col-md-2">
-                <label class="ml-2" for="start-date">Start Date:</label>
-            
-            <input type="date" value="@Model.accmast.from_Date?.ToString("yyyy-MM-dd")" class="form-control" id="startDate" name="startDate" required>
-            </div>
-            <div class="form-group col-md-2">
-                <label class="ml-2" for="end-date">End Date:</label>
-            <input type="date" value="@Model.accmast.to_Date?.ToString("yyyy-MM-dd")" class="form-control" id="endDate" name="endDate" required>
-            </div>
-            <div class="form-group col-md-2"><input class="ml-2 btn btn-primary" type="submit" style="margin-top: 32px;" value="Submit"></div>
+        <div class="form-group col-md-2">
+            <label class="ml-2" for="start-date">Start Date:</label>
+
+            <input type="date" value="@Model.Item1.accmast.from_Date?.ToString("yyyy-MM-dd")" class="form-control" id="startDate" name="startDate" required>
         </div>
-    </form>
+        <div class="form-group col-md-2">
+            <label class="ml-2" for="end-date">End Date:</label>
+            <input type="date" value="@Model.Item1.accmast.to_Date?.ToString("yyyy-MM-dd")" class="form-control" id="endDate" name="endDate" required>
+        </div>
+        <div class="form-group col-md-2"><input class="ml-2 btn btn-primary" type="submit" style="margin-top: 32px;" value="Submit"></div>
+    </div>
+</form>
 
 <div>
 </div>
-
+<div style="    margin-top: -64px;
+    display: flex;
+    float: right;
+    margin-right: 144px;">
+    <form method="get" action="@Url.Action("DownloadPdf", "DashBoard")">
+        <input type="hidden" id="accno" name="accno" value="@Model.Item1.accmast.accno">
+        <input type="hidden" id="startDate" name="startDate" value="@Model.Item1.accmast.from_Date?.ToString("yyyy-MM-dd")">
+        <input type="hidden" id="endDate" name="endDate" value="@Model.Item1.accmast.to_Date?.ToString("yyyy-MM-dd")">
+        <button type="submit" class="btn btn-secondary">Print</button>
+    </form>
+</div>
 <div>
-    @foreach (var r in Model.Accmast)
-    {
-        <div style="border-radius: 8px; margin-bottom: 15px; padding: .5rem .5rem">
-            <strong>Account No:</strong> @r.accno <br>
-            <strong>Name:</strong> @r.name <br>
-            <strong>Owner:</strong> @r.accowner <br>
-            <div class style="position:absolute;float:right;right:9vw;top:218px">
-                <strong>Account Description:</strong> @r.acc_desc<br>
-                <strong>Opening Balance:</strong> @r.op_bal <br>
-                <strong>Closing Balance:</strong> @r.cl_bal <br>
-            </div>
+    <div style="border-radius: 8px; margin-bottom: 15px; padding: .5rem .5rem; margin-top: 20px">
+        <strong>Account No: </strong>@Model.Item2.FirstOrDefault()?.newacno<br>
+        <strong>Name: </strong>@Model.Item2.FirstOrDefault()?.bankname <br>
+        <strong>Address: </strong> @Model.Item2.FirstOrDefault()?.addr1 <br>
+        <div class style="position:absolute;float:right;right:9vw;top:218px">
+            <strong>Opening Balance: </strong> @Model.Item2.FirstOrDefault()?.openingbalance <br>
+            <strong>Closing Balance: </strong> @Model.Item2.LastOrDefault()?.closingbalance<br>
+            <strong>Status: </strong> @Model.Item2.FirstOrDefault()?.accstatus <br>
         </div>
-    }
+    </div>
 </div>
 
 <div>
     <table id="Txn-History-table" class="styled-table">
         <thead>
             <tr>
-                <th>SR No</th>
+                <th>Account Number</th>
                 <th>Txn Date</th>
-                <th>Txn Details</th>
                 <th>Description</th>
-                <th>FDR No</th>
-                <th>Withdraw</th>
-                <th>Deposit</th>
+                <th>Credit Amount</th>
+                <th>Opening Balance</th>
+                <th>Closing Balance</th>
                 <th>Balance</th>
-                <th>Maker</th>
-                <th>Checker</th>
+                <th>Account Status</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var r in Model.Accmast)
+            @foreach (var r in Model.Item2)
             {
                 <tr style="background: #ffff0000">
                     <td>@r.accno</td>
-                    <td>@r.open_date</td>
-                    <td>@r.acc_desc</td>
-                    <td>@r.fdrno</td>
-                    <td>@r.acc_type</td>
-                    <td>@r.op_bal</td>
-                    <td>@r.cl_bal</td>
-                    <td>@r.accowner</td>
-                    @* <td>@r.cname</td>
-                    <td>@r.newacno</td> *@
+                    <td>@r.txndate.ToString("dd-MM-yyyy")</td>
+                    <td>@r.txn_desc</td>
+                    <td>@r.cramt</td>
+                    <td>@r.openingbalance</td>
+                    <td>@r.closingbalance</td>
+                    <td>@r.balance</td>
+                    <td>@r.accstatus</td>
                 </tr>
             }
         </tbody>
@@ -89,7 +91,7 @@
     <script>
         $(document).ready(function () {
             $('#Txn-History-table').DataTable({
-                "paging": false,
+                "paging": true,
                 "searching": false,
                 "info": false
             });

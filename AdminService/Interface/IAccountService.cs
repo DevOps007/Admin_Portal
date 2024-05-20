@@ -10,6 +10,6 @@ namespace AdminService.Interface
 {
     public interface IAccountService
     {
-        Task<AccountModel> GetAccountData(string accountNumber, DateTime startDate, DateTime endDate);
+        Task<IEnumerable<TxnHistory>> GetAccountData(string accountNumber, DateTime startDate, DateTime endDate);
     }
 }

@@ -14,5 +14,6 @@
         public DateTime TxnStart { get; set; }
         public DateTime TxnEnd { get; set; }
         public string? CEDSolid { get; set; }
+        public DateTime txn_start { get; set; }
     }
 }

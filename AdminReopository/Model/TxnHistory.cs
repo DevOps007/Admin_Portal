@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace AdminReopository.Model
+namespace DataLayer.Model
 {
     public class TxnHistory
     {
@@ -44,6 +44,7 @@ namespace AdminReopository.Model
         public decimal tot_dr { get; set; }
         public decimal tot_cr { get; set; }
         public DateTime txndate { get; set; }
+        public string balance { get; set; }
     }
 
 }

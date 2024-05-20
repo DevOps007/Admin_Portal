@@ -42,6 +42,7 @@ namespace DataLayer.Model
         public string? baltype { get; set; }
         public decimal tot_dr { get; set; }
         public decimal tot_cr { get; set; }
-
+        public string dp { get; set; }
+        public string staff { get; set; }
     }
 }

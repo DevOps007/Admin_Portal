@@ -19,13 +19,8 @@ namespace Bank_Portal.Controllers
             _accountmasterservice = accountMasterService;
         }
 
-
+        
         [HttpGet]
-        public IActionResult Search()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> SearchResult()
         {
             return View(new AccountModel());
@@ -46,7 +41,11 @@ namespace Bank_Portal.Controllers
                 accno = accountModel.accmast.accno,
                 oldacno = accountModel.accmast.oldacno,
                 close_date = accountModel.accmast.close_date,
+                close_end_date=accountModel.accmast.close_end_date,
                 open_date = accountModel.accmast.open_date,
+                open_end_date=accountModel.accmast.open_end_date,
+                name= accountModel.accmast.name,
+                status= accountModel.accmast.status,
             };
 
             var updatedAccountModel = new AccountModel

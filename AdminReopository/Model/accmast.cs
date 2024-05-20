@@ -87,7 +87,8 @@ namespace DataLayer.Model
         public string? oldacno { get; set; }
         public int? PXid { get; set; }
         public string? bank { get; set; }
-     
+        public DateTime? open_end_date { get; set; }
+        public DateTime? close_end_date { get; set; }
 
     }
     public class AccountModel

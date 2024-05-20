@@ -21,4 +21,5 @@ namespace AdminReopository.Model
         public DateTime TxnEnd { get; set; }
         public string? CEDSolid { get; set; }
     }
+ 
 }
