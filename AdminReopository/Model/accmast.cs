@@ -121,7 +121,7 @@ namespace DataLayer.Model
     }
     public class AccountModel
     {
-        public accmast accmast { get; set; }=new accmast();
+        public accmast accmast { get; set; } = new accmast();
         public List<accmast> Accmast { get; set; } = new List<accmast>();
     }
 }

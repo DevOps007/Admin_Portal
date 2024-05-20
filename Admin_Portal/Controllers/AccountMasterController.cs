@@ -4,19 +4,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-
+using System;
+using System.Threading.Tasks;
 
 namespace Bank_Portal.Controllers
 {
     public class AccountMasterController : Controller
     {
-        public readonly IAccountMasterService _accountmasterservice ;
+        private readonly IAccountMasterService _accountMasterService;
 
         public AccountMasterController(IAccountMasterService accountMasterService)
         {
-            _accountmasterservice = accountMasterService;
+            _accountMasterService = accountMasterService ?? throw new ArgumentNullException(nameof(accountMasterService));
         }
-
 
         [HttpGet]
         public IActionResult Search()
@@ -24,12 +24,15 @@ namespace Bank_Portal.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> SearchResult(accmast accmaster)
         {
-            var searchResult = await _accountmasterservice.SearchAccountsAsync(accmaster);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var searchResult = await _accountMasterService.SearchAccountsAsync(accmaster);
 
             TempData["AccNo"] = accmaster.accno;
             TempData["OldAccNo"] = accmaster.oldacno;
@@ -40,10 +43,9 @@ namespace Bank_Portal.Controllers
             {
                 Accmast = searchResult.ToList()
             };
+
             return View(accountModel.Accmast);
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> Details(string accno)
@@ -55,7 +57,7 @@ namespace Bank_Portal.Controllers
                     return NotFound();
                 }
 
-                var account = await _accountmasterservice.GetAccountByAccnoAsync(accno);
+                var account = await _accountMasterService.GetAccountByAccnoAsync(accno);
 
                 if (account == null)
                 {
@@ -70,7 +72,7 @@ namespace Bank_Portal.Controllers
                     branch = account.branch,
                     bank = account.bank,
                     custid = account.custid,
-                    cl_bal= account.cl_bal,
+                    cl_bal = account.cl_bal,
                     op_bal = account.op_bal,
                     accowner = account.accowner,
                     acc_desc = account.acc_desc,
@@ -81,26 +83,12 @@ namespace Bank_Portal.Controllers
                 };
 
                 return View("Details", accountModel);
-
             }
             catch (Exception ex)
             {
-                // Log the exception here
                 Log.Error(ex, "An error occurred while retrieving account details for account number {Accno}", accno);
-
-                // Redirect to an error page
                 return RedirectToAction("Error", "Home");
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }

@@ -74,26 +74,15 @@
                                     <!-- /.col -->
                                     <div class="col-4">
                                         <button type="submit" class="btn btn-primary btn-block" onclick="validateAndSubmit">Sign In</button>
-                                    </div>
-
-
-                                    <!-- /.col -->
+                                    </div>                                  
                                 </div>
-
                             </form>
-
-
-
                         </div>
                     </div>
 
                 </div>
             </div>
-
-
-
-            <!-- /.container -->
-            <!-- jQuery -->
+           
             <script src="~/plugins/jquery/jquery.min.js"></script>
             <!-- Bootstrap 4 -->
             <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -103,10 +92,10 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
             <script>
                 $(document).ready(function () {
-                    // Check if SuccessMessage exists in TempData
+                   
                     var successMessage = '@TempData["SuccessMessage"]';
                     if (successMessage !== '') {
-                        // Display Toastr success notification
+                       
                         toastr.success(successMessage);
                     }
                 });

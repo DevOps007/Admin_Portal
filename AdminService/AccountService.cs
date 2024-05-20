@@ -41,7 +41,7 @@ namespace AdminService
             {
 
                 _logger.LogError(ex, "Error occurred while retrieving account data for account number: {AccountNumber}", accno);
-                throw; // Re-throw the exception to be caught by the caller
+                throw;
             }
         }
     }

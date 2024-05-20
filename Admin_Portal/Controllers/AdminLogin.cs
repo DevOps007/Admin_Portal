@@ -46,24 +46,6 @@ namespace Admin_Portal.Controllers
                 return View();
             }
         }
-        //[HttpPost]
-        ////public IActionResult Login(string username, string password)
-        ////{
-        ////    if (_loginService.Login(username, password))
-        ////    {
-        ////        // Successful login
-        ////        Log.Information("Successful login for username: {Username}", username);
-        ////        TempData["SuccessMessage"] = "Login successful.";
-        ////        return RedirectToAction("DashBoard", "DashBoard");
-        ////    }
-        ////    else
-        ////    {
-        ////        // Unsuccessful login
-        ////        Log.Warning("Unsuccessful login attempt for username: {Username}", username);
-        ////        TempData["ErrorMessage"] = "Invalid username or password.";
-        ////        return RedirectToAction("Login", "AdminLogin"); // Redirect to login page or any other appropriate page
-        ////    }
-        ////}
 
     }
 
