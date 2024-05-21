@@ -14,6 +14,7 @@ namespace DataLayer.Model
         public string? accno { get; set; }
         public string? txndt { get; set; }
         public string? txnid { get; set; }
+       
         public string? txn_number { get; set; }
         public string? txnleg { get; set; }
         public string? txntype { get; set; }

@@ -45,10 +45,11 @@
         <strong>Account No: </strong>@Model.Item2.FirstOrDefault()?.newacno<br>
         <strong>Name: </strong>@Model.Item2.FirstOrDefault()?.bankname <br>
         <strong>Address: </strong> @Model.Item2.FirstOrDefault()?.addr1 <br>
-        <div class style="position:absolute;float:right;right:9vw;top:218px">
-            <strong>Opening Balance: </strong> @Model.Item2.FirstOrDefault()?.openingbalance <br>
-            <strong>Closing Balance: </strong> @Model.Item2.LastOrDefault()?.closingbalance<br>
-            <strong>Status: </strong> @Model.Item2.FirstOrDefault()?.accstatus <br>
+        <div class style="position:absolute;float:right;right:9vw;top:234px">
+           
+           <strong>Scheme Code-: </strong> @Model.Item2.FirstOrDefault()?.proddesc <br>
+           
+            <strong>Status: </strong> @Model.Item2.FirstOrDefault()?.accstatus <br> 
         </div>
     </div>
 </div>
@@ -57,28 +58,30 @@
     <table id="Txn-History-table" class="styled-table">
         <thead>
             <tr>
-                <th>Account Number</th>
+                <th>SR No.</th>
                 <th>Txn Date</th>
                 <th>Description</th>
-                <th>Credit Amount</th>
-                <th>Opening Balance</th>
-                <th>Closing Balance</th>
+                <th>Cheque Number</th>
+                <th>Withdraw</th>
+                <th>Deposit</th>
                 <th>Balance</th>
-                <th>Account Status</th>
+                
+              
             </tr>
         </thead>
         <tbody>
             @foreach (var r in Model.Item2)
             {
                 <tr style="background: #ffff0000">
-                    <td>@r.accno</td>
+                    <td>@r.Id</td>
                     <td>@r.txndate.ToString("dd-MM-yyyy")</td>
                     <td>@r.txn_desc</td>
-                    <td>@r.cramt</td>
-                    <td>@r.openingbalance</td>
-                    <td>@r.closingbalance</td>
+                    <td>@r.chq_no</td>
+                    <td>@r.tot_cr</td>
+                    <td>@r.tot_dr</td>
                     <td>@r.balance</td>
-                    <td>@r.accstatus</td>
+                    
+                    
                 </tr>
             }
         </tbody>

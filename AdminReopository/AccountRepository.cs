@@ -35,10 +35,8 @@ namespace AdminReopository
                     parameters.Add("@from_Date", fromDate);
                     parameters.Add("@to_Date", toDate);
                     parameters.Add("@acc_number", accno);
-                    var result = await connection.QueryAsync<accmast>("stmt", parameters, commandType: CommandType.StoredProcedure);
-                    var accountModel = new AccountModel();
-                    accountModel.Accmast = result.AsList();
-                    return accountModel;
+                    var result = await connection.QueryAsync<TxnHistory>("stmt", parameters, commandType: CommandType.StoredProcedure);
+                    return result.AsEnumerable();
                 }
             }
             catch (Exception ex)

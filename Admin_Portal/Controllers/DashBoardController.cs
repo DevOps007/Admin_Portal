@@ -50,7 +50,7 @@ namespace Admin_Portal.Controllers
 
         [HttpPost]
         public async Task<IActionResult> GetAccount(string accno, DateTime startDate, DateTime endDate)
-        {
+         {
             try
             {
                 var accountStatement= await _accountservice.GetAccountData(accno, startDate, endDate);
@@ -89,16 +89,17 @@ namespace Admin_Portal.Controllers
                 AccountMaster accountMaster = new AccountMaster();
                 Admin_Portal.Models.Login loginModel = new Admin_Portal.Models.Login();
 
-                loginModel.BankName = transactions.FirstOrDefault().bankname;
-                loginModel.BranchName = transactions.FirstOrDefault().br_name;
-                loginModel.Location = transactions.FirstOrDefault().addr1;
-                loginModel.txn_start = DateTime.Now.Date;
+                    loginModel.BankName = transactions.FirstOrDefault().bankname;
+                    loginModel.BranchName = transactions.FirstOrDefault().br_name;
+                    loginModel.Location = transactions.FirstOrDefault().addr1;
+                    loginModel.txn_start = DateTime.Now.Date;
 
-                accountMaster.proddesc = transactions.FirstOrDefault().accstatus;
-                accountMaster.newacno = transactions.FirstOrDefault().newacno;
-                accountMaster.dp = transactions.FirstOrDefault().cname;
-                accountMaster.staff = $"Account Statement From {startDate.ToString("dd-MM-yyyy")} To {endDate.ToString("dd-MM-yyyy")}";
-
+                    accountMaster.proddesc = transactions.FirstOrDefault().accstatus;
+                    accountMaster.newacno = transactions.FirstOrDefault().newacno;
+                    accountMaster.dp = transactions.FirstOrDefault().cname;
+                    accountMaster.staff = $"Account Statement From {startDate.ToString("dd-MM-yyyy")} To {endDate.ToString("dd-MM-yyyy")}";
+                transactions.ToList().ForEach(x => { x.chq_no = x.chq_no == null ? "" : x.chq_no; });
+                transactions.ToList().ForEach(x => { x.txntype = x.txn_number == null ? "" : x.baltype; });
                 accountMasters.Add(accountMaster);
                 loginList.Add(loginModel);
 

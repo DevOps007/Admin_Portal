@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AdminReopository\DataLayer.csproj" />
     <ProjectReference Include="..\AdminService\BusinessLayer.csproj" />
-    <ProjectReference Include="..\Reporting\Reporting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
