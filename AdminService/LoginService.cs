@@ -25,9 +25,9 @@ namespace AdminService
             }
             catch (Exception ex)
             {
-                // Log exception
+                
                 _logger.LogError(ex, "Error occurred during login for username: {Username}", username);
-                throw; // Re-throw the exception to be caught by the caller
+                throw;
             }
         }
     }

@@ -29,14 +29,16 @@ namespace AdminReopository
                 using (var connection = _dbConnection)
                 {
                     connection.Open();
-                    var fromDate = startDate?.ToString("dd-MM-yyyy");
-                    var toDate = endDate?.ToString("dd-MM-yyyy");
+                    var fromDate = startDate.HasValue ? startDate.Value.ToString("dd-MM-yyyy") : null;
+                    var toDate = endDate.HasValue ? endDate.Value.ToString("dd-MM-yyyy") : null;
                     var parameters = new DynamicParameters();
                     parameters.Add("@from_Date", fromDate);
                     parameters.Add("@to_Date", toDate);
                     parameters.Add("@acc_number", accno);
-                    var result = await connection.QueryAsync<TxnHistory>("stmt", parameters, commandType: CommandType.StoredProcedure);
-                    return result;
+                    var result = await connection.QueryAsync<accmast>("stmt", parameters, commandType: CommandType.StoredProcedure);
+                    var accountModel = new AccountModel();
+                    accountModel.Accmast = result.AsList();
+                    return accountModel;
                 }
             }
             catch (Exception ex)

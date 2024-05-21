@@ -25,6 +25,7 @@ namespace AdminService
             {
                 var accmast = new accmast()
                 {
+                    accno = accno,
                     from_Date = startDate,
                     to_Date = endDate
                 };
@@ -35,7 +36,7 @@ namespace AdminService
             {
 
                 _logger.LogError(ex, "Error occurred while retrieving account data for account number: {AccountNumber}", accno);
-                throw; // Re-throw the exception to be caught by the caller
+                throw;
             }
         }
     }

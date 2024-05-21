@@ -47,6 +47,7 @@ namespace Admin_Portal.Controllers
             var model = new Tuple<AccountModel, IEnumerable<TxnHistory>>(new AccountModel(), new List<TxnHistory>());
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> GetAccount(string accno, DateTime startDate, DateTime endDate)
         {
@@ -68,7 +69,7 @@ namespace Admin_Portal.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex, "Error occurred while retrieving account data for account number: {AccountNumber}", accno);
-                throw;
+                return View("Error");
             }
         }
 

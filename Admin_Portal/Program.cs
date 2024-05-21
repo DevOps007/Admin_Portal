@@ -32,7 +32,6 @@ var builder = WebApplication.CreateBuilder(args);
 //       });
 
 
-// Configure Serilog
 var serilogConfiguration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -50,15 +49,15 @@ try
 
     builder.Services.AddRazorPages();
 
-    // Add DbContext and Serilog
+    
     builder.Services.AddDbContext<AdminEntities>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
     builder.Services.AddControllersWithViews();
-    //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x => x.LoginPath = "Adminlogin/Login");
+ 
 
-    // Add your services
+    
     builder.Services.AddScoped<ILoginService, LoginService>();
     builder.Services.AddScoped<ILoginRepository, LoginRepository>();
     builder.Services.AddScoped<IAccountService, AccountService>();
@@ -91,6 +90,8 @@ try
 
     app.UseRouting();
     app.UseAuthentication();
+    
+
     app.UseAuthorization();
 
     app.UseMiddleware<ExceptionHandling>();

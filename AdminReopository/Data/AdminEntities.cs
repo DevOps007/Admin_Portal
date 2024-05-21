@@ -21,20 +21,20 @@ namespace AdminReopository.EDMX
 
         public DbSet<AccountMaster> AccountMasters { get; set; }
 
-        public  DbSet<accmast> accmast { get; set; }
+        public DbSet<accmast> accmast { get; set; }
 
-        
 
-       
+
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure entity mappings and relationships here
+            
             modelBuilder.Entity<Login>().HasNoKey();
             modelBuilder.Entity<TxnHistory>().HasKey(a => a.Id);
             modelBuilder.Entity<AccountMaster>().HasKey(a => a.accno);
-           
+
         }
     }
 }
