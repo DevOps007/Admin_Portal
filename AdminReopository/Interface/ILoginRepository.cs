@@ -10,6 +10,7 @@ namespace AdminReopository.Interface
     public interface ILoginRepository
     {
         bool Login(string username, string password);
+         string? GetBankName(string username);
         //Task<Login> GetLoginAsync(string userName);
     }
 }

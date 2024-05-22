@@ -16,7 +16,6 @@ namespace AdminService
             _loginRepository = loginRepository;
             _logger = logger;
         }
-
         public bool Login(string username, string password)
         {
             try
@@ -25,8 +24,20 @@ namespace AdminService
             }
             catch (Exception ex)
             {
-                
                 _logger.LogError(ex, "Error occurred during login for username: {Username}", username);
+                throw;
+            }
+        }
+
+        public string? GetBankName(string username)
+        {
+            try
+            {
+                return _loginRepository.GetBankName(username);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving bank name for username: {Username}", username);
                 throw;
             }
         }

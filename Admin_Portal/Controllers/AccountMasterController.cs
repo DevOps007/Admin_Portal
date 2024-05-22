@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Interface;
+﻿using AdminService.Interface;
+using BusinessLayer.Interface;
 using DataLayer.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,36 +15,67 @@ namespace Bank_Portal.Controllers
     public class AccountMasterController : Controller
     {
         private readonly IAccountMasterService _accountMasterService;
+        private readonly ILoginService _loginService;
 
-        public AccountMasterController(IAccountMasterService accountMasterService)
+        public AccountMasterController(IAccountMasterService accountMasterService, ILoginService loginService)
         {
             _accountMasterService = accountMasterService ?? throw new ArgumentNullException(nameof(accountMasterService));
+            _loginService = loginService;
         }
 
 
         [HttpGet]
         public async Task<IActionResult> SearchResult()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                string username = User.Identity.Name;
+                string bankName = _loginService.GetBankName(username);
+                ViewBag.bankName = bankName;
+            }
             return View(new AccountModel());
         }
+
 
         [HttpPost]
         public async Task<IActionResult> SearchResult(AccountModel accountModel)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (User.Identity.IsAuthenticated)
+                {
+                    string username = User.Identity.Name;
+                    string bankName = _loginService.GetBankName(username);
+                    ViewBag.bankName = bankName;
+                }
+                var result = await _accountMasterService.SearchAccountsAsync(accountModel.accmast);
+                accountModel.Accmast = result.ToList();
+                return View(accountModel);
             }
-            var result = await _accountMasterService.SearchAccountsAsync(accountModel.accmast);
-            accountModel.Accmast = result.ToList();
-            return View(accountModel);
+            catch (Exception ex)
+            {
+
+                Log.Error(ex, "Error occurred while searching accounts.");
+                return View("Error");
+            }
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Details(string accno)
         {
             try
             {
+                if (User.Identity.IsAuthenticated)
+                {
+                    string username = User.Identity.Name;
+                    string bankName = _loginService.GetBankName(username);
+                    ViewBag.bankName = bankName;
+                }
                 if (string.IsNullOrEmpty(accno))
                 {
                     return NotFound();

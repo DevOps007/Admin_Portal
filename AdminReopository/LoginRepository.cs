@@ -19,7 +19,7 @@ namespace AdminReopository
         {
             _configuration = configuration;
             _logger = logger;
-           // _dbConnection = new SqlConnection(dbConnection.ConnectionString);
+           
         }
 
         public bool Login(string username, string password)
@@ -63,14 +63,27 @@ namespace AdminReopository
                 throw;
             }
         }
-        //public async Task<Login> GetLoginAsync(string userName) {
 
-        //    _dbConnection.Open();
-        //    string sql = "Select BankName,BranchName,Location,BankCode from Login where username=@userName";
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("@userName", userName);
-        //    var result = await _dbConnection.QueryAsync<Login>(sql, parameters);
-        //    return result?.FirstOrDefault();
-        //}
+        public string? GetBankName(string username)
+        {
+            try
+            {
+                string connectionString = _configuration.GetConnectionString("DefaultConnection");
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string sql = "SELECT BankName FROM Login WHERE UserName = @Username";
+
+                    var bankName = connection.QuerySingleOrDefault<string>(sql, new { Username = username });
+
+                    return bankName;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving bank name for username: {Username}", username);
+                throw;
+            }
+        }
     }
 }

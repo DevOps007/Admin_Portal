@@ -24,10 +24,6 @@ namespace AdminReopository.EDMX
         public DbSet<accmast> accmast { get; set; }
 
 
-
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             

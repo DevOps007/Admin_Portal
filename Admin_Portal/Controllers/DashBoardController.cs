@@ -16,6 +16,7 @@ using System.Collections;
 using Admin_Portal.Models;
 using AdminReopository.Interface;
 using System.Drawing.Printing;
+using AdminService;
 
 namespace Admin_Portal.Controllers
 {
@@ -25,13 +26,14 @@ namespace Admin_Portal.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IAccountService _accountservice;
         private readonly ILoginRepository _loginRepository;
-
-        public DashBoardController(IAccountService accountservice, IWebHostEnvironment webHostEnvironment, ILoginRepository loginRepository)
+        private readonly ILoginService _loginService;
+        public DashBoardController(IAccountService accountservice, IWebHostEnvironment webHostEnvironment, ILoginRepository loginRepository, ILoginService loginService)
         {
             _accountservice = accountservice;
             _webHostEnvironment = webHostEnvironment;
             _loginRepository = loginRepository;
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            _loginService = loginService;
         }
         public IActionResult Index()
         {
@@ -40,34 +42,64 @@ namespace Admin_Portal.Controllers
 
         public IActionResult DashBoard()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                string username = User.Identity.Name;
+                string bankName = _loginService.GetBankName(username);
+                ViewBag.bankName = bankName;
+            }
             return View();
         }
+       
         public IActionResult GetAccount()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                string username = User.Identity.Name;
+                string bankName = _loginService.GetBankName(username);
+                ViewBag.bankName = bankName;
+            }           
             var model = new Tuple<AccountModel, IEnumerable<TxnHistory>>(new AccountModel(), new List<TxnHistory>());
+         
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> GetAccount(string accno, DateTime startDate, DateTime endDate)
-         {
+        {
             try
             {
-                var accountStatement= await _accountservice.GetAccountData(accno, startDate, endDate);
+                
+                if (User.Identity.IsAuthenticated)
+                {
+                    string username = User.Identity.Name;
+                    string bankName = _loginService.GetBankName(username);
+                    ViewBag.bankName = bankName;
+                }
+
+                
+                var accountStatement = await _accountservice.GetAccountData(accno, startDate, endDate);
+
+               
                 var accmast = new accmast()
                 {
                     accno = accno,
                     from_Date = startDate,
                     to_Date = endDate
                 };
+
+                
                 var accountModel = new AccountModel
                 {
                     accmast = accmast
                 };
+
+                
                 return View(new Tuple<AccountModel, IEnumerable<TxnHistory>>(accountModel, accountStatement));
             }
             catch (Exception ex)
             {
+               
                 Log.Error(ex, "Error occurred while retrieving account data for account number: {AccountNumber}", accno);
                 return View("Error");
             }
@@ -99,7 +131,7 @@ namespace Admin_Portal.Controllers
                     accountMaster.dp = transactions.FirstOrDefault().cname;
                     accountMaster.staff = $"Account Statement From {startDate.ToString("dd-MM-yyyy")} To {endDate.ToString("dd-MM-yyyy")}";
                 transactions.ToList().ForEach(x => { x.chq_no = x.chq_no == null ? "" : x.chq_no; });
-                transactions.ToList().ForEach(x => { x.txntype = x.txn_number == null ? "" : x.baltype; });
+                transactions.ToList().ForEach(x => { x.baltype = x.baltype == null ? "" : x.baltype; });
                 accountMasters.Add(accountMaster);
                 loginList.Add(loginModel);
 

@@ -23,12 +23,13 @@ namespace Admin_Portal.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("DashBoard", "DashBoard");
             }
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
@@ -39,7 +40,7 @@ namespace Admin_Portal.Controllers
                 {
                     new Claim(ClaimTypes.Name, username),
                     new Claim(ClaimTypes.Role, "Admin"),
-                 
+
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);

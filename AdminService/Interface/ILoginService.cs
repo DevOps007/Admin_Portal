@@ -9,5 +9,6 @@ namespace AdminService.Interface
     public interface ILoginService
     {
         bool Login(string username, string password);
+        string? GetBankName(string username);
     }
 }
