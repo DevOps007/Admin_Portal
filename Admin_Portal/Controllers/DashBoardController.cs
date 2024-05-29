@@ -115,6 +115,11 @@ namespace Admin_Portal.Controllers
                     throw new InvalidOperationException("No transactions found for the given account and date range.");
                 }
 
+                //var lastTransaction = transactions.OrderByDescending(t => t.fromdate).FirstOrDefault();
+
+                
+                //var lastBalance = lastTransaction.balance;
+
                 string reportFilePath = $"{this._webHostEnvironment.WebRootPath}\\Reports\\Report.rdlc";
                 List<Admin_Portal.Models.Login> loginList = new List<Admin_Portal.Models.Login>();
                 List<DataLayer.Model.AccountMaster> accountMasters = new List<AccountMaster>();
@@ -130,8 +135,10 @@ namespace Admin_Portal.Controllers
                     accountMaster.newacno = transactions.FirstOrDefault().newacno;
                     accountMaster.dp = transactions.FirstOrDefault().cname;
                     accountMaster.staff = $"Account Statement From {startDate.ToString("dd-MM-yyyy")} To {endDate.ToString("dd-MM-yyyy")}";
+            
                 transactions.ToList().ForEach(x => { x.chq_no = x.chq_no == null ? "" : x.chq_no; });
                 transactions.ToList().ForEach(x => { x.baltype = x.baltype == null ? "" : x.baltype; });
+                
                 accountMasters.Add(accountMaster);
                 loginList.Add(loginModel);
 

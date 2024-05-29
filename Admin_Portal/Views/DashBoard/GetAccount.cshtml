@@ -1,4 +1,5 @@
-﻿@model Tuple<DataLayer.Model.AccountModel, IEnumerable<DataLayer.Model.TxnHistory>>
+﻿
+@model Tuple<DataLayer.Model.AccountModel, IEnumerable<DataLayer.Model.TxnHistory>>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -45,13 +46,13 @@
 <div>
     <div style="border-radius: 8px; margin-bottom: 15px; padding: .5rem .5rem; margin-top: 20px">
         <strong>Account No: </strong>@Model.Item2.FirstOrDefault()?.newacno<br>
-        <strong>Name: </strong>@Model.Item2.FirstOrDefault()?.bankname <br>
-        <strong>Address: </strong> @Model.Item2.FirstOrDefault()?.addr1 <br>
+        <strong>Name: </strong>@Model.Item2.FirstOrDefault()?.cname <br>
+        <strong>Address: </strong> @(Model.Item2.FirstOrDefault()?.addr1 + " " + @Model.Item2.FirstOrDefault()?.addr2 + " " + @Model.Item2.FirstOrDefault()?.addr3) <br>
         <div class style="position:absolute;float:right;right:9vw;top:234px">
-           
-           <strong>Scheme Code-: </strong> @Model.Item2.FirstOrDefault()?.proddesc <br>
-           
-            <strong>Status: </strong> @Model.Item2.FirstOrDefault()?.accstatus <br> 
+
+            <strong>Scheme Code-: </strong> @Model.Item2.FirstOrDefault()?.proddesc <br>
+            <strong>Old Account Number-: </strong> @Model.Item2.FirstOrDefault()?.foracid <br>
+            <strong>Status: </strong> @Model.Item2.FirstOrDefault()?.accstatus <br>
         </div>
     </div>
 </div>
@@ -60,30 +61,32 @@
     <table id="Txn-History-table" class="styled-table">
         <thead>
             <tr>
-                <th>SR No.</th>
+
                 <th>Txn Date</th>
                 <th>Description</th>
                 <th>Cheque Number</th>
                 <th>Withdraw</th>
                 <th>Deposit</th>
                 <th>Balance</th>
-                
-              
+                <th>Balance Type</th>
+
+
             </tr>
         </thead>
         <tbody>
             @foreach (var r in Model.Item2)
             {
                 <tr style="background: #ffff0000">
-                    <td>@r.Id</td>
+
                     <td>@r.txndate.ToString("dd-MM-yyyy")</td>
                     <td>@r.txn_desc</td>
                     <td>@r.chq_no</td>
                     <td>@r.tot_cr</td>
                     <td>@r.tot_dr</td>
                     <td>@r.balance</td>
-                    
-                    
+                    <td>@r.baltype</td>
+
+
                 </tr>
             }
         </tbody>
@@ -98,7 +101,9 @@
             $('#Txn-History-table').DataTable({
                 "paging": true,
                 "searching": false,
-                "info": false
+                "info": false,
+                "aaSorting": []
+
             });
         });
     </script>
