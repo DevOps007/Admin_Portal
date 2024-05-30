@@ -131,7 +131,8 @@ namespace Admin_Portal.Controllers
                     loginModel.Location = transactions.FirstOrDefault().addr1;
                     loginModel.txn_start = DateTime.Now.Date;
 
-                    accountMaster.proddesc = transactions.FirstOrDefault().accstatus;
+                accountMaster.proddesc = transactions.FirstOrDefault().proddesc;
+                    accountMaster.accstatus = transactions.FirstOrDefault().accstatus;
                     accountMaster.newacno = transactions.FirstOrDefault().newacno;
                     accountMaster.dp = transactions.FirstOrDefault().cname;
                     accountMaster.staff = $"Account Statement From {startDate.ToString("dd-MM-yyyy")} To {endDate.ToString("dd-MM-yyyy")}";
