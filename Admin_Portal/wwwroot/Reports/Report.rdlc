@@ -858,14 +858,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txndate">
+                        <Textbox Name="txndt">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!txndate.Value</Value>
+                                  <Value>=Fields!txndt.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>d</Format>
@@ -877,7 +877,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>txndate</rd:DefaultName>
+                          <rd:DefaultName>txndt</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1075,14 +1075,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="clbal">
+                        <Textbox Name="dr_cr">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!txn_number.Value</Value>
+                                  <Value>=Fields!dr_cr.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1093,7 +1093,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>clbal</rd:DefaultName>
+                          <rd:DefaultName>dr_cr</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1107,6 +1107,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1591,8 +1592,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>3.45778cm</Top>
-              <Left>13.49348cm</Left>
+              <Top>3.36706cm</Top>
+              <Left>13.4582cm</Left>
               <Height>0.6cm</Height>
               <Width>2.42944cm</Width>
               <ZIndex>12</ZIndex>
@@ -1659,10 +1660,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>4.03762cm</Top>
+              <Top>4.03763cm</Top>
               <Left>13.4582cm</Left>
               <Height>0.6cm</Height>
-              <Width>3.73488cm</Width>
+              <Width>2.5cm</Width>
               <ZIndex>14</ZIndex>
               <Style>
                 <Border>
@@ -1730,7 +1731,7 @@
               <Top>2.8225cm</Top>
               <Left>11.82956cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.5cm</Width>
+              <Width>1.59336cm</Width>
               <ZIndex>16</ZIndex>
               <Style>
                 <Border>
@@ -1750,15 +1751,17 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!proddesc.Value, "AccountMaster")</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox18</rd:DefaultName>
-              <Top>2.85778cm</Top>
-              <Left>14.04785cm</Left>
+              <Top>2.8225cm</Top>
+              <Left>14.50595cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>17</ZIndex>
