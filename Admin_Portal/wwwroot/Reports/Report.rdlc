@@ -445,6 +445,10 @@
           <DataField>chq_no</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="baltype">
+          <DataField>baltype</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="gl_head">
           <DataField>gl_head</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -501,6 +505,10 @@
           <DataField>vardate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="TBGroupIndex">
+          <DataField>TBGroupIndex</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="linkid">
           <DataField>linkid</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -545,6 +553,14 @@
           <DataField>cramt</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="str_dramt">
+          <DataField>str_dramt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="str_cramt">
+          <DataField>str_cramt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="PXid">
           <DataField>PXid</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -560,6 +576,10 @@
         <Field Name="balance">
           <DataField>balance</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="str_balance">
+          <DataField>str_balance</DataField>
+          <rd:TypeName>System.string</rd:TypeName>
         </Field>
         <Field Name="ID">
           <DataField>ID</DataField>
@@ -588,25 +608,25 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.46405cm</Width>
+                  <Width>3.05601cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.51241cm</Width>
+                  <Width>4.3016cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.80574cm</Width>
+                  <Width>2.3977cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.8398cm</Width>
+                  <Width>2.43176cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.69869cm</Width>
+                  <Width>2.29065cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.82216cm</Width>
+                  <Width>2.41412cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01619cm</Width>
+                  <Width>2.60815cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -622,7 +642,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Date</Value>
+                                  <Value>Date </Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -974,7 +994,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dramt.Value</Value>
+                                  <Value>=Fields!str_dramt.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1010,7 +1030,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!cramt.Value</Value>
+                                  <Value>=Fields!str_cramt.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1039,14 +1059,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="balance">
+                        <Textbox Name="str_balance">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!balance.Value</Value>
+                                  <Value>=Fields!str_balance.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1057,7 +1077,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>balance</rd:DefaultName>
+                          <rd:DefaultName>str_balance</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1071,18 +1091,19 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="dr_cr">
+                        <Textbox Name="baltype">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dr_cr.Value</Value>
+                                  <Value>=Fields!baltype.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1093,7 +1114,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>dr_cr</rd:DefaultName>
+                          <rd:DefaultName>baltype</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1126,20 +1147,35 @@
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Details" />
+                  <Group Name="TBGroupIndex">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!TBGroupIndex.Value</GroupExpression>
+                    </GroupExpressions>
+                    <PageBreak>
+                      <BreakLocation>End</BreakLocation>
+                    </PageBreak>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!acctype.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Group Name="Details" />
+                    </TablixMember>
+                  </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <DataSetName>TxnHistory</DataSetName>
-            <Top>0.03528cm</Top>
-            <Left>1.905cm</Left>
+            <Top>0.09525cm</Top>
+            <Left>0.22225cm</Left>
             <Height>1.2cm</Height>
-            <Width>14.15904cm</Width>
+            <Width>19.49999cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1147,7 +1183,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>0.57255in</Height>
+        <Height>1.03088in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1155,10 +1191,10 @@
           <BackgroundColor>White</BackgroundColor>
         </Style>
       </Body>
-      <Width>7.05867in</Width>
+      <Width>8.74892in</Width>
       <Page>
         <PageHeader>
-          <Height>5.30818cm</Height>
+          <Height>2.07594in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1182,16 +1218,14 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.24611cm</Top>
-              <Left>0.44675in</Left>
+              <Left>0.0625in</Left>
               <Height>0.6cm</Height>
-              <Width>16.05833cm</Width>
+              <Width>20cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
                 <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
@@ -1216,9 +1250,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.88139cm</Top>
-              <Left>0.44675in</Left>
+              <Left>0.0625in</Left>
               <Height>0.6cm</Height>
-              <Width>16.05833cm</Width>
+              <Width>20cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1251,9 +1285,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.48139cm</Top>
-              <Left>0.44675in</Left>
+              <Left>0.0625in</Left>
               <Height>0.6cm</Height>
-              <Width>16.05833cm</Width>
+              <Width>20cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1284,7 +1318,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox3</rd:DefaultName>
               <Top>2.26342cm</Top>
-              <Left>2.20367cm</Left>
+              <Left>3.15617cm</Left>
               <Height>0.6cm</Height>
               <Width>2.21778cm</Width>
               <ZIndex>3</ZIndex>
@@ -1305,7 +1339,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!accno.Value, "TxnHistory")</Value>
+                      <Value>=First(Fields!accno.Value, "AccountMaster")</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>
@@ -1318,7 +1352,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>2.2225cm</Top>
-              <Left>3.80762cm</Left>
+              <Left>4.76012cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>4</ZIndex>
@@ -1351,7 +1385,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox5</rd:DefaultName>
               <Top>2.89305cm</Top>
-              <Left>2.20367cm</Left>
+              <Left>3.15617cm</Left>
               <Height>0.6cm</Height>
               <Width>2.04139cm</Width>
               <ZIndex>5</ZIndex>
@@ -1385,7 +1419,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox6</rd:DefaultName>
               <Top>2.89305cm</Top>
-              <Left>3.21495cm</Left>
+              <Left>4.16745cm</Left>
               <Height>0.6cm</Height>
               <Width>6.51911cm</Width>
               <ZIndex>6</ZIndex>
@@ -1418,7 +1452,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox7</rd:DefaultName>
               <Top>3.45778cm</Top>
-              <Left>2.20367cm</Left>
+              <Left>3.15617cm</Left>
               <Height>0.6cm</Height>
               <Width>2.04139cm</Width>
               <ZIndex>7</ZIndex>
@@ -1452,7 +1486,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>3.45778cm</Top>
-              <Left>3.46895cm</Left>
+              <Left>4.42145cm</Left>
               <Height>0.6cm</Height>
               <Width>4.71778cm</Width>
               <ZIndex>8</ZIndex>
@@ -1487,7 +1521,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox9</rd:DefaultName>
               <Top>2.18722cm</Top>
-              <Left>11.57556cm</Left>
+              <Left>12.52806cm</Left>
               <Height>0.6cm</Height>
               <Width>2.14722cm</Width>
               <ZIndex>9</ZIndex>
@@ -1522,7 +1556,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox10</rd:DefaultName>
               <Top>2.18722cm</Top>
-              <Left>13.4582cm</Left>
+              <Left>14.4107cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>10</ZIndex>
@@ -1555,7 +1589,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>3.4225cm</Top>
-              <Left>11.82956cm</Left>
+              <Left>12.78206cm</Left>
               <Height>0.6cm</Height>
               <Width>1.84736cm</Width>
               <ZIndex>11</ZIndex>
@@ -1590,7 +1624,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
               <Top>3.36707cm</Top>
-              <Left>13.42292cm</Left>
+              <Left>14.37542cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>12</ZIndex>
@@ -1623,8 +1657,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox15</rd:DefaultName>
-              <Top>4.70818cm</Top>
-              <Left>5.25384cm</Left>
+              <Top>4.6729cm</Top>
+              <Left>6.93067cm</Left>
               <Height>0.6cm</Height>
               <Width>8.65125cm</Width>
               <ZIndex>13</ZIndex>
@@ -1658,7 +1692,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox16</rd:DefaultName>
               <Top>2.8225cm</Top>
-              <Left>11.82956cm</Left>
+              <Left>12.78206cm</Left>
               <Height>0.6cm</Height>
               <Width>1.59336cm</Width>
               <ZIndex>14</ZIndex>
@@ -1690,7 +1724,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox18</rd:DefaultName>
               <Top>2.8225cm</Top>
-              <Left>13.59931cm</Left>
+              <Left>14.55181cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>15</ZIndex>
@@ -1712,13 +1746,13 @@
             <BackgroundColor>White</BackgroundColor>
           </Style>
         </PageHeader>
-        <PageHeight>17cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
-        <LeftMargin>1cm</LeftMargin>
-        <RightMargin>2cm</RightMargin>
-        <TopMargin>2cm</TopMargin>
-        <BottomMargin>2cm</BottomMargin>
-        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <PageHeight>11.69in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
+        <LeftMargin>0.19685in</LeftMargin>
+        <RightMargin>0.19685in</RightMargin>
+        <TopMargin>0.19685in</TopMargin>
+        <BottomMargin>0.19685in</BottomMargin>
+        <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
@@ -1729,6 +1763,7 @@
       <NumberOfRows>2</NumberOfRows>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>f026702d-0c55-4681-b231-9108403c51bf</rd:ReportID>
 </Report>

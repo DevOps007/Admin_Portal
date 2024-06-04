@@ -27,13 +27,15 @@ namespace Admin_Portal.Controllers
         private readonly IAccountService _accountservice;
         private readonly ILoginRepository _loginRepository;
         private readonly ILoginService _loginService;
-        public DashBoardController(IAccountService accountservice, IWebHostEnvironment webHostEnvironment, ILoginRepository loginRepository, ILoginService loginService)
+        private readonly ILogger<DashBoardController> _logger;
+        public DashBoardController(IAccountService accountservice, IWebHostEnvironment webHostEnvironment, ILoginRepository loginRepository, ILoginService loginService, ILogger<DashBoardController> logger)
         {
             _accountservice = accountservice;
             _webHostEnvironment = webHostEnvironment;
             _loginRepository = loginRepository;
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             _loginService = loginService;
+            _logger = logger;
         }
         public IActionResult Index()
         {
@@ -79,8 +81,8 @@ namespace Admin_Portal.Controllers
 
                 
                 var accountStatement = await _accountservice.GetAccountData(accno, startDate, endDate);
+                accountStatement = accountStatement.Except(accountStatement.Where(x => x.txn_desc == "Total Balance"));
 
-               
                 var accmast = new accmast()
                 {
                     accno = accno,
@@ -110,15 +112,12 @@ namespace Admin_Portal.Controllers
             try
             {
                 var transactions = await _accountservice.GetAccountData(accno, startDate, endDate);
+                //transactions = transactions.Except(transactions.Where(x => x.txn_desc == "Total Balance"));
                 if (transactions == null || !transactions.Any())
                 {
                     throw new InvalidOperationException("No transactions found for the given account and date range.");
                 }
 
-                //var lastTransaction = transactions.OrderByDescending(t => t.fromdate).FirstOrDefault();
-
-                
-                //var lastBalance = lastTransaction.balance;
 
                 string reportFilePath = $"{this._webHostEnvironment.WebRootPath}\\Reports\\Report.rdlc";
                 List<Admin_Portal.Models.Login> loginList = new List<Admin_Portal.Models.Login>();
@@ -131,14 +130,17 @@ namespace Admin_Portal.Controllers
                     loginModel.Location = transactions.FirstOrDefault().addr1;
                     loginModel.txn_start = DateTime.Now.Date;
 
-                accountMaster.proddesc = transactions.FirstOrDefault().proddesc;
-                    accountMaster.accstatus = transactions.FirstOrDefault().accstatus;
+                
+                    accountMaster.proddesc = transactions.FirstOrDefault().proddesc;
+                    accountMaster.accno = transactions.FirstOrDefault().foracid;
                     accountMaster.newacno = transactions.FirstOrDefault().newacno;
-                    accountMaster.dp = transactions.FirstOrDefault().cname;
-                    accountMaster.staff = $"Account Statement From {startDate.ToString("dd-MM-yyyy")} To {endDate.ToString("dd-MM-yyyy")}";
+                   accountMaster.dp = transactions.FirstOrDefault().cname;
+                   accountMaster.staff = $"Account Statement From {startDate.ToString("dd-MM-yyyy")} To {endDate.ToString("dd-MM-yyyy")}";
+           
             
                 transactions.ToList().ForEach(x => { x.chq_no = x.chq_no == null ? "" : x.chq_no; });
                 transactions.ToList().ForEach(x => { x.baltype = x.baltype == null ? "" : x.baltype; });
+               
                 
                 accountMasters.Add(accountMaster);
                 loginList.Add(loginModel);
@@ -151,7 +153,7 @@ namespace Admin_Portal.Controllers
 
                     using (LocalReport report = new LocalReport())
                     {
-                        report.LoadReportDefinition(reportDefinition);
+                        report.LoadReportDefinition(reportDefinition);  
                         report.DataSources.Add(new ReportDataSource("TxnHistory", dataSource));
                         report.DataSources.Add(new ReportDataSource("Login", loginDataSource));
                         report.DataSources.Add(new ReportDataSource("AccountMaster", accountMasterDataSource));
@@ -163,6 +165,7 @@ namespace Admin_Portal.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while DownloadPdf");
                 return View("Error");
             }
         }

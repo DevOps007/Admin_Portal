@@ -44,6 +44,9 @@ namespace DataLayer.Model
         public decimal tot_cr { get; set; }
         public string dp { get; set; }
         public string staff { get; set; }
-        
+        public string? dramtNew { get; set; }
+        public string str_balance { get; set; }
+
+
     }
 }

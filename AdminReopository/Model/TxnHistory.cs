@@ -45,6 +45,11 @@ namespace DataLayer.Model
         public decimal tot_cr { get; set; }
         public DateTime txndate { get; set; }
         public string balance { get; set; }
+        public string ? dramtNew { get; set; }
+        public int? TBGroupIndex { get; set; }
+        public string str_dramt { get; set; }
+        public string str_cramt { get; set; }
+        public string? str_balance {  get; set; }
     }
 
 }
