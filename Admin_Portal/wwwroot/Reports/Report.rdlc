@@ -1091,7 +1091,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1172,7 +1171,7 @@
             </TablixRowHierarchy>
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <DataSetName>TxnHistory</DataSetName>
-            <Top>0.09525cm</Top>
+            <Top>0.09524cm</Top>
             <Left>0.22225cm</Left>
             <Height>1.2cm</Height>
             <Width>19.49999cm</Width>
@@ -1183,7 +1182,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>1.03088in</Height>
+        <Height>0.57255in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1191,7 +1190,7 @@
           <BackgroundColor>White</BackgroundColor>
         </Style>
       </Body>
-      <Width>8.74892in</Width>
+      <Width>8in</Width>
       <Page>
         <PageHeader>
           <Height>2.07594in</Height>
@@ -1747,9 +1746,8 @@
           </Style>
         </PageHeader>
         <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.19685in</LeftMargin>
-        <RightMargin>0.19685in</RightMargin>
+        <PageWidth>8.2in</PageWidth>
+        <LeftMargin>0.2in</LeftMargin>
         <TopMargin>0.19685in</TopMargin>
         <BottomMargin>0.19685in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
