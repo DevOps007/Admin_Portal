@@ -90,10 +90,10 @@ namespace Bank_Portal.Controllers
 
                 var accountModel = new accmast
                 {
-                    accno = account.accmast.accno,
+                    oldacno = account.accmast.oldacno,
                     name = account.accmast.name,
                     acc_type = account.accmast.acc_type,
-                    branch = account.accmast.branch,
+                    newacno = account.accmast.newacno,
                     bank = account.accmast.bank,
                     custid = account.accmast.custid,
                     cl_bal = account.accmast.cl_bal,
