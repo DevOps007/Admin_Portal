@@ -31,6 +31,7 @@ namespace DataLayer.Model
         public string? bankname { get; set; }
         public string? br_name { get; set; }
         public string? br_addr1 { get; set; }
+        public string? status { get; set; }
         public string? newacno { get; set; }
         public string?  addr1 { get; set; }
         public string? addr2 { get; set; }

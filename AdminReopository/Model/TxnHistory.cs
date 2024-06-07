@@ -38,6 +38,7 @@ namespace DataLayer.Model
         public string? addr3 { get; set; }
         public string? proddesc { get; set; }
         public string? accstatus { get; set; }
+        public string? status { get; set; }
         public string? fromdate { get; set; }
         public string? todate { get; set; }
         public string? baltype { get; set; }

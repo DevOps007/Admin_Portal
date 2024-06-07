@@ -130,7 +130,7 @@ namespace Admin_Portal.Controllers
                     loginModel.Location = transactions.FirstOrDefault().addr1;
                     loginModel.txn_start = DateTime.Now.Date;
 
-                
+                    accountMaster.status = transactions.FirstOrDefault().accstatus;
                     accountMaster.proddesc = transactions.FirstOrDefault().proddesc;
                     accountMaster.accno = transactions.FirstOrDefault().foracid;
                     accountMaster.newacno = transactions.FirstOrDefault().newacno;
