@@ -1,7 +1,16 @@
 ﻿@model DataLayer.Model.accmast
 
 <div class="row mb-2" style="padding-left: 8px;">
-    <h3>Account Details</h3>
+    <h3>Account Master</h3>
+</div>
+
+<div>
+    <div style="border-radius: 8px; margin-bottom: 15px; padding: .5rem .5rem; margin-top: 20px">
+        <strong>Account No: </strong>@Model.oldacno<br>
+        <strong>Name: </strong>@Model.name <br>
+        <strong>Address: </strong> @($"{Model.addr1} {Model.addr2} {Model.addr3}")
+        <strong>Status-: </strong> @Model.status <br>
+    </div>
 </div>
 
 <form>
