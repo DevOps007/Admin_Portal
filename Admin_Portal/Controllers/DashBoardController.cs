@@ -127,8 +127,9 @@ namespace Admin_Portal.Controllers
 
                     loginModel.BankName = transactions.FirstOrDefault().bankname;
                     loginModel.BranchName = transactions.FirstOrDefault().br_name;
-                    loginModel.Location = transactions.FirstOrDefault().addr1;
-                    loginModel.txn_start = DateTime.Now.Date;
+                loginModel.Location = transactions.FirstOrDefault().addr1 + " " + transactions.FirstOrDefault().addr2 + " " + transactions.FirstOrDefault().addr3;
+
+                loginModel.txn_start = DateTime.Now.Date;
 
                     accountMaster.status = transactions.FirstOrDefault().accstatus;
                     accountMaster.proddesc = transactions.FirstOrDefault().proddesc;
