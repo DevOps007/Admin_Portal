@@ -6,6 +6,9 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using AdminReopository.Model;
 using Dapper;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace AdminReopository
 {
@@ -27,6 +30,8 @@ namespace AdminReopository
             try
             {
                 string connectionString = _configuration.GetConnectionString("DefaultConnection");
+
+                password = GenerateSha256Hash(password);
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -62,6 +67,13 @@ namespace AdminReopository
                 _logger.LogError(ex, "Error occurred during login");
                 throw;
             }
+        }
+
+        internal static string GenerateSha256Hash(string password)
+        {
+            using SHA256 sHA = SHA256.Create();
+            var computed =  sHA.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return BitConverter.ToString(computed).Replace("-", "");
         }
 
         public string? GetBankName(string username)
