@@ -105,14 +105,23 @@ namespace DataLayer
                     parameters.Add("@oldacno", accmast.oldacno);
                     hasFilter = true;
                 }
+                //if (!string.IsNullOrEmpty(accmast.name))
+                //{
+                //    if (!hasFilter) sql += " AND ";
+                //    else sql += " OR ";
+                //    sql += "name = @name";
+                //    parameters.Add("@name", accmast.name);
+                //    hasFilter = true;
+                //}
                 if (!string.IsNullOrEmpty(accmast.name))
                 {
-                    if (!hasFilter) sql += " AND ";
-                    else sql += " OR ";
-                    sql += "name = @name";
-                    parameters.Add("@name", accmast.name);
+                    if (hasFilter) sql += " OR ";
+                    else sql += " AND ";
+                    sql += "name LIKE @name";
+                    parameters.Add("@name", "%" + accmast.name + "%");
                     hasFilter = true;
                 }
+
                 if (!string.IsNullOrEmpty(accmast.status))
                 {
                     if (!hasFilter) sql += " AND ";
